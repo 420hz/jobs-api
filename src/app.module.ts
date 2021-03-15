@@ -6,11 +6,13 @@ import { AppService } from './app.service';
 import { Configuration } from './shared/configuration/configuration.enum';
 import { ConfigurationService } from './shared/configuration/configuration.service';
 import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
+import { StrategiesService } from './shared/auth/strategies/strategies.service';
 
 @Module({
-  imports: [SharedModule, MongooseModule.forRoot(ConfigurationService.connectionString)],
+  imports: [SharedModule, MongooseModule.forRoot(ConfigurationService.connectionString, { useNewUrlParser: true, useUnifiedTopology: true }), UserModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, StrategiesService],
 })
 export class AppModule {
 
